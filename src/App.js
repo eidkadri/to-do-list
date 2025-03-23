@@ -10,18 +10,21 @@ const App = () => {
   const [reminder, setReminder] = useState('');
   const [editTodo, setEditTodo] = useState(null);
 
+  // رابط الخلفية (Backend URL)
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+
   // استرجاع المهام من الخادم
   useEffect(() => {
-    axios.get('http://localhost:5000/api/todos')
+    axios.get(`${backendUrl}/api/todos`)
       .then(response => setTodos(response.data))
       .catch(error => console.error(error));
-  }, []);
+  }, [backendUrl]);
 
   // إضافة مهمة جديدة
   const addTodo = () => {
     if (editTodo) {
       // تعديل المهمة
-      axios.put(`http://localhost:5000/api/todos/${editTodo._id}`, { task, dueDate, priority, reminder })
+      axios.put(`${backendUrl}/api/todos/${editTodo._id}`, { task, dueDate, priority, reminder })
         .then(response => {
           setTodos(todos.map(todo => todo._id === editTodo._id ? response.data : todo));
           setEditTodo(null);
@@ -29,7 +32,7 @@ const App = () => {
         .catch(error => console.error(error));
     } else {
       // إضافة مهمة جديدة
-      axios.post('http://localhost:5000/api/todos', { task, dueDate, priority, reminder })
+      axios.post(`${backendUrl}/api/todos`, { task, dueDate, priority, reminder })
         .then(response => setTodos([...todos, response.data]))
         .catch(error => console.error(error));
     }
@@ -41,7 +44,7 @@ const App = () => {
 
   // حذف مهمة
   const deleteTodo = (id) => {
-    axios.delete(`http://localhost:5000/api/todos/${id}`)
+    axios.delete(`${backendUrl}/api/todos/${id}`)
       .then(() => setTodos(todos.filter(todo => todo._id !== id)))
       .catch(error => console.error(error));
   };
