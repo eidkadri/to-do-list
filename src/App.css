@@ -1,7 +1,10 @@
+/* التصميم العام */
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .header {
@@ -14,6 +17,7 @@
 
 .header h1 {
   margin: 0;
+  font-size: 24px;
 }
 
 .task-form {
@@ -27,6 +31,7 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .task-form button {
@@ -52,13 +57,14 @@
   border-radius: 5px;
   border: 1px solid #ddd;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .task-item span {
   flex: 1;
   text-align: left;
+  font-size: 16px;
 }
 
 .task-item span:first-child {
@@ -68,6 +74,7 @@
 .task-actions {
   display: flex;
   gap: 10px;
+  justify-content: flex-end;
 }
 
 .task-actions button {
@@ -75,6 +82,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .task-actions button:first-child {
@@ -89,4 +97,29 @@
 
 .task-actions button:hover {
   opacity: 0.8;
+}
+
+/* التصميم للأجهزة المحمولة */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .task-form input, .task-form select, .task-form button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .task-item {
+    padding: 10px;
+  }
+
+  .task-item span {
+    font-size: 14px;
+  }
+
+  .task-actions button {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }
